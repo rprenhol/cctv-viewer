@@ -430,7 +430,7 @@ FocusScope {
                             id: player
 
                             color: root.color
-                            source: viewport.url
+                            source: viewport.lowResUrl || viewport.url
                             volume: Math.max(viewport.volume, root.fullScreenIndex === index && viewportSettings.unmuteWhenFullScreen)
                             avOptions: viewport.avFormatOptions
                             loops: MediaPlayer.Infinite
@@ -454,6 +454,25 @@ FocusScope {
                             Behavior on y {
                                 NumberAnimation { duration: 100; easing.type: Easing.OutQuad }
                             }
+
+                            states: [
+                                State {
+                                    name: "highRes"          // high res on fullscreen
+                                    when: viewport.fullScreen === true
+                                    PropertyChanges {
+                                        target: player
+                                        source: model.url
+                                    }
+                                },
+                                State {
+                                    name: "lowRes"           // low res on grid view
+                                    when: viewport.fullScreen === false
+                                    PropertyChanges {
+                                        target: player
+                                        source: model.lowResUrl
+                                    }
+                                }
+                            ]
                         }
                         
                         Rectangle {
@@ -654,6 +673,9 @@ FocusScope {
                 if (root.get(i).selected) {
                     model.get(i).url = "";
                     model.get(i).volume = 0;
+                    model.get(i).lowResUrl = "";
+                    model.get(i).name = "";
+                    model.get(i).description = "";
                     model.get(i).avFormatOptions = layoutsCollectionSettings.toJSValue("defaultAVFormatOptions");
                 }
             }
