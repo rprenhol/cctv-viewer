@@ -465,6 +465,7 @@ FocusScope {
                                 TextField {
                                     text: enabled ? Utils.currentModel().get(currentViewportIndex).name : ""
                                     selectByMouse: true
+                                    placeholderText: qsTr("Name")
 
                                     Layout.fillWidth: true
 
@@ -472,7 +473,7 @@ FocusScope {
                                 }
 
                                 Text {
-                                        text: qsTr("URL")
+                                        text: qsTr("Default URL")
                                         color: "white"
                                         font.pointSize: rootWindow.font.pointSize * 1.05
                                 }
@@ -486,6 +487,23 @@ FocusScope {
 
                                     onEditingFinished: Utils.currentModel().get(currentViewportIndex).url = text
                                 }
+
+                                Text {
+                                        text: qsTr("Low Resolution URL")
+                                        color: "white"
+                                        font.pointSize: rootWindow.font.pointSize * 1.05
+                                }
+
+                                TextField {
+                                    text: enabled ? Utils.currentModel().get(currentViewportIndex).lowResUrl : ""
+                                    placeholderText: qsTr("Url")
+                                    selectByMouse: true
+
+                                    Layout.fillWidth: true
+
+                                    onEditingFinished: Utils.currentModel().get(currentViewportIndex).lowResUrl = text
+                                }
+
 
                                 Text {
                                         text: qsTr("Description")

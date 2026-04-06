@@ -22,6 +22,7 @@ public:
     Q_ENUM(Visible)
 
     QMLAV_PROPERTY(QString, url, setUrl, urlChanged);
+    QMLAV_PROPERTY(QString, lowResUrl, setLowResUrl, lowResUrlChanged);
     QMLAV_PROPERTY(QString, name, setName, nameChanged);
     QMLAV_PROPERTY(QString, description, setDescription, descriptionChanged);
     QMLAV_PROPERTY(int, rowSpan, setRowSpan, rowSpanChanged) = 1;
